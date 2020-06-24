@@ -1,7 +1,8 @@
 # from pymongo import MongoClient
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from pymongo import MongoClient
+from bson import json_util, ObjectId
 
 # Establish a connection for CRUD ops on the samples collection under the stark DB
 client = MongoClient('mongodb://localhost:27017')
@@ -21,7 +22,7 @@ def pushToys():
     toys = []
     for sample in collection.find():
         toys.append({
-            # "id": sample["_id"],
+            "id": str(sample["_id"]),
             "title": sample["title"],
             "price": sample["price"],
             "desc": sample["desc"],
@@ -31,4 +32,24 @@ def pushToys():
         })
 
     # Serve serialized container array under toys section in JSON
-    return ({"toys": toys})
+    return {"toys": toys}
+
+@app.route("/product")
+@cross_origin()
+def pushToy():
+
+    # Get url id string from incoming request
+    _id = request.args.get("id")
+    # Find product by id in the collection
+    search = collection.find_one({ "_id": ObjectId(_id) })
+    product = {
+        "title": search["title"],
+        "price": search["price"],
+        "desc": search["desc"],
+        "age": search["age"],
+        "tags": search["tags"],
+        "color": search["color"]
+    }
+
+    # Serve product info
+    return product
