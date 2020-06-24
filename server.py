@@ -28,7 +28,7 @@ def pushToys():
             "desc": sample["desc"],
             "age": sample["age"],
             "tags": sample["tags"],
-            "color": sample["color"]
+            "colors": sample["colors"]
         })
 
     # Serve serialized container array under toys section in JSON
@@ -48,7 +48,7 @@ def pushToy():
         "desc": search["desc"],
         "age": search["age"],
         "tags": search["tags"],
-        "color": search["color"]
+        "colors": search["colors"]
     }
 
     # Serve product info

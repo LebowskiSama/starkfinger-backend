@@ -13,7 +13,7 @@ def gen(category=False, color=False):
     if color is True:
         shades = ["Light", "Dark", "Grey", "Tinted", "Matte", "Glossy"]
         colors = ["Purple", "Orange", "Grey", "Black", "Violet", "Yellow", "Green", "Pink", "Taupe", "Beige", "Neon"]
-        return([shades[random.randrange(len(shades) - 1)], colors[random.randrange(len(colors) - 1)]])
+        return([shades[random.randrange(len(shades) - 1)] + " " + colors[random.randrange(len(colors) - 1)], shades[random.randrange(len(shades) - 1)] + " " + colors[random.randrange(len(colors) - 1)]])
 
     
     if category is True:
@@ -44,7 +44,7 @@ def toygen():
         "desc": "Lorem ipsum dolor sit amet, prompta minimum urbanitas usu no. Agam vocibus forensibus ad nam. Putent aperiam in sea, eum placerat dissentiunt definitiones ne. Pri nibh omnis voluptua an. Nulla consectetuer eos ex, possit denique quo eu, id eum scripta numquam. Mea in alii esse causae, eam ea graece graeco.",
         "age": random.randrange(3, 13),
         "tags": gen(category=True),
-        "color": gen(color=True)
+        "colors": gen(color=True)
     }
 
     return sample
