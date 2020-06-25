@@ -18,21 +18,43 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @cross_origin()
 def pushToys():
 
-    # Initialize a container array
-    toys = []
-    for sample in collection.find():
-        toys.append({
-            "id": str(sample["_id"]),
-            "title": sample["title"],
-            "price": sample["price"],
-            "desc": sample["desc"],
-            "age": sample["age"],
-            "tags": sample["tags"],
-            "colors": sample["colors"]
-        })
+    param = request.args.get("sort")
 
-    # Serve serialized container array under toys section in JSON
-    return {"toys": toys}
+    if param is None:
+
+        # Initialize a container array
+        toys = []
+        for sample in collection.find():
+            toys.append({
+                "id": str(sample["_id"]),
+                "title": sample["title"],
+                "price": sample["price"],
+                "age": sample["age"],
+                "tags": sample["tags"],
+                "colors": sample["colors"]
+            })
+
+        # Serve serialized container array under toys section in JSON
+        return {"toys": toys}
+    
+    if param == "price":
+
+        # Initialize container array
+        toys = []
+        # Sort collection by price
+        for sample in collection.find().sort("price"):
+            toys.append({
+                "id": str(sample["_id"]),
+                "title": sample["title"],
+                "price": sample["price"],
+                "age": sample["age"],
+                "tags": sample["tags"],
+                "colors": sample["colors"]
+            })
+        
+        # Serve sorted container array in JSON
+        return {"toys": toys}
+
 
 @app.route("/product")
 @cross_origin()
@@ -53,3 +75,11 @@ def pushToy():
 
     # Serve product info
     return product
+
+@app.route("/tags")
+@cross_origin()
+def pushTags():
+
+    # Find distinct categories/tags for toys
+    tags = collection.find().distinct("tags")
+    return {"tags": tags}
