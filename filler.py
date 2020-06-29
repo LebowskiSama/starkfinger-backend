@@ -40,7 +40,8 @@ def toygen():
     # Set up some basic attributes to be inserted
     sample = {
         "title": gen(),
-        "price": random.randrange(300, 1500, 50),
+        # Generate prices in the range 10 - 50 usd with a step count of 2 usd
+        "price": random.randrange(7, 29, 2),
         "desc": "Lorem ipsum dolor sit amet, prompta minimum urbanitas usu no. Agam vocibus forensibus ad nam. Putent aperiam in sea, eum placerat dissentiunt definitiones ne. Pri nibh omnis voluptua an. Nulla consectetuer eos ex, possit denique quo eu, id eum scripta numquam. Mea in alii esse causae, eam ea graece graeco.",
         "age": random.randrange(3, 13),
         "tags": gen(category=True),
@@ -49,7 +50,8 @@ def toygen():
 
     return sample
 
+
+# Populate the DB
 for i in range(50):
 
-    # Populate the DB
     collection.insert_one(toygen())

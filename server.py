@@ -80,6 +80,15 @@ def pushToy():
 @cross_origin()
 def pushTags():
 
-    # Find distinct categories/tags for toys
+    # Find and push distinct categories/tags for toys
     tags = collection.find().distinct("tags")
-    return {"tags": tags}
+    return { "tags": tags }
+
+
+@app.route("/names")
+@cross_origin()
+def pushNames():
+
+    # Find and push distinct toy names
+    names = collection.find().distinct("title")
+    return { "names": names }
