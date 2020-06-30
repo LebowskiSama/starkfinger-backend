@@ -31,7 +31,8 @@ def pushToys():
                 "price": sample["price"],
                 "age": sample["age"],
                 "tags": sample["tags"],
-                "colors": sample["colors"]
+                "colors": sample["colors"],
+                "image": sample["image"]
             })
 
         # Serve serialized container array under toys section in JSON
@@ -49,7 +50,9 @@ def pushToys():
                 "price": sample["price"],
                 "age": sample["age"],
                 "tags": sample["tags"],
-                "colors": sample["colors"]
+                "colors": sample["colors"],
+                "image": sample["image"]
+
             })
         
         # Serve sorted container array in JSON
@@ -70,7 +73,9 @@ def pushToy():
         "desc": search["desc"],
         "age": search["age"],
         "tags": search["tags"],
-        "colors": search["colors"]
+        "colors": search["colors"],
+        "image": search["image"]
+
     }
 
     # Serve product info
